@@ -1,19 +1,22 @@
 /*
-=========================================
-Criando o Banco de Dados e Esquemas
-=========================================
-Objetivo do Script:
-Este script cria um novo banco de dados chamado 'DataWarehouse' após verificar se ele já existe. 
-Se o banco de dados existir, ele será excluído (dropped) e recriado. 
-Além disso, o script configura três esquemas dentro do banco de dados: 'bronze', 'silver' e 'gold'.
+===============================================================================
+PROJETO: Data Warehouse - Integração CRM & ERP
+AUTOR: Agnaldo Gonzaga
+DESCRIÇÃO: Setup Inicial do Ambiente de Dados
+===============================================================================
+OBJETIVO:
+    Este script é o ponto de partida do projeto. Ele realiza a limpeza de 
+    instâncias anteriores e prepara a fundação do Data Warehouse.
 
---------------------------------------------------------------------------------
- AVISO IMPORTANTE (WARNING)
---------------------------------------------------------------------------------
-A execução deste script irá EXCLUIR (DROP) todo o banco de dados 'DataWarehouse' 
-se ele já existir. Todos os dados serão permanentemente apagados. 
-Certifique-se de ter backups antes de prosseguir.
+AÇÕES REALIZADAS:
+    1. Verifica a existência e remove o banco 'DataWarehouse'.
+    2. Cria o banco de dados 'DataWarehouse'.
+    3. Define as camadas da Medallion Architecture (Bronze, Silver, Gold).
 
+AVISO:
+    A execução deste script é DESTRUTIVA. Ele apaga todos os dados existentes
+    no banco 'DataWarehouse' antes de recriá-lo.
+===============================================================================
 */
 
 USE master;
