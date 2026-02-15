@@ -1,48 +1,25 @@
-/* ========================================================================
-   PROJETO: Data Warehouse - Integração CRM & ERP
-   AUTOR: [Agnaldo Gonzaga]
-   PERFIL: Engenharia de Dados | Análise de Dados
-   BANCO DE DADOS: SQL Server
-   LINGUAGEM: T-SQL (DDL)
+/*
+===============================================================================
+PROJETO: Data Warehouse - Integração CRM & ERP
+AUTOR: Agnaldo Gonzaga
+DESCRIÇÃO: Implementação da Camada BRONZE (Raw Layer)
+===============================================================================
+CONTEXTO:
+    A Camada Bronze representa a 'Single Source of Truth' (Fonte Única da Verdade)
+    dos dados brutos. Aqui, os dados são ingeridos "como estão" na origem, 
+    garantindo a linhagem completa do dado.
 
-   ------------------------------------------------------------------------
-   CONTEXTO DO PROJETO
-   ------------------------------------------------------------------------
-   Este projeto simula um cenário real de integração de dados entre 
-   sistemas CRM e ERP, aplicando conceitos de Data Warehouse e 
-   arquitetura Medallion (Bronze, Silver e Gold).
+BOAS PRÁTICAS APLICADAS:
+    - Isolamento por Schema (bronze)
+    - Persistência da estrutura original (Raw Data)
+    - Scripts Idempotentes (DROP IF EXISTS) para automação CI/CD
+    - Nomenclatura técnica preservada para facilitar o mapeamento com o ERP/CRM
 
-   Este script implementa a Camada Bronze (Raw Layer), responsável pela:
-   - Ingestão de dados brutos
-   - Estruturação inicial das tabelas
-   - Padronização de nomenclaturas
-   - Preparação para transformação posterior
-
-   ------------------------------------------------------------------------
-   BOAS PRÁTICAS APLICADAS
-   ------------------------------------------------------------------------
-    Organização por schema (bronze)
-    Padronização de nomenclatura
-    Separação por domínio (CRM / ERP)
-    Uso de DROP IF EXISTS para controle de versionamento
-    Estrutura preparada para evolução para modelo dimensional
-
-   ------------------------------------------------------------------------
-   TABELAS CRIADAS
-   ------------------------------------------------------------------------
-   CRM:
-   - crm_cust_info        → Informações de clientes
-   - crm_sales_details    → Detalhes de vendas
-   - crm_prd_info         → Informações de produtos
-
-   ERP:
-   - erp_loc_a101         → Localização de clientes
-   - erp_cust_az12        → Dados demográficos de clientes
-   - erp_px_cat_g1v2      → Categorias e subcategorias de produtos
-
-   ======================================================================== */
-
-
+MAPA DE DADOS (DOMÍNIOS):
+    - CRM: Clientes (crm_cust_info), Vendas (crm_sales_details), Produtos (crm_prd_info)
+    - ERP: Localização (erp_loc_a101), Demografia (erp_cust_az12), Categorias (erp_px_cat_g1v2)
+===============================================================================
+*/
 
 IF OBJECT_ID ('bronze.crm_cust_info' , 'U') IS NOT NULL
 	DROP TABLE bronze.crm_cust_info;
