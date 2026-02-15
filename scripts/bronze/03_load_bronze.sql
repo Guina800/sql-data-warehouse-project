@@ -1,27 +1,28 @@
-/* ============================================================
-   PROJETO: Data Warehouse – Arquitetura Medallion
-   CAMADA: Bronze
-   OBJETIVO:
-       Realizar carga FULL dos dados brutos provenientes 
-       dos sistemas CRM e ERP para a camada Bronze.
+/*
+===============================================================================
+PROJETO: Data Warehouse - Integração CRM & ERP
+AUTOR: Agnaldo Gonzaga
+DESCRIÇÃO: Stored Procedure para Carga da Camada BRONZE
+===============================================================================
+OBJETIVO:
+    Este script automatiza o processo de ETL (Extract, Load) da camada Bronze.
+    Ele extrai dados de arquivos CSV (arquivos fonte) e os carrega nas tabelas
+    do SQL Server, garantindo que o estado atual da camada reflita os dados brutos.
 
-   ESTRATÉGIA:
-       - TRUNCATE TABLE → Remove dados existentes antes da carga (Full Reload)
-       - BULK INSERT → Carrega os arquivos CSV diretamente nas tabelas
-       - Medição de tempo de execução para cada tabela e para o batch completo
-       - Mensagens PRINT exibem progresso e duração de cada etapa
+FLUXO DE EXECUÇÃO:
+    1. Truncate: Limpeza das tabelas bronze existentes (Full Load).
+    2. Bulk Insert: Carga massiva de arquivos CSV localizados no repositório.
+    3. Logging: Monitoramento do tempo de execução por tabela e total do lote.
+    4. Error Handling: Tratamento de erros estruturado com TRY...CATCH.
 
- OBSERVAÇÕES IMPORTANTES:
-       - Arquivos CSV devem estar em diretório com permissão de leitura para o serviço SQL Server.
-       - Diretórios utilizados no script:
-           CRM: 'D:\Area de trabalho\PJ DTWH\sql-data-warehouse-project\datasets\source_crm\'
-           ERP: 'D:\Area de trabalho\PJ DTWH\sql-data-warehouse-project\datasets\source_erp\'
-       - Procedure bronze.load_bronze deve ser criada antes de ser executada.
-       - Em caso de erro, o CATCH captura a mensagem, código e estado do erro, e interrompe a execução.
-       - O script pode ser reutilizado para execução periódica da carga FULL na camada Bronze
+PARÂMETROS:
+    Nenhum. A procedure utiliza caminhos de diretório pré-definidos.
 
-
-============================================================ */
+DEPENDÊNCIAS:
+    - Arquivos CSV no diretório: ..\datasets\source_crm\ e ..\datasets\source_erp\
+    - Tabelas criadas no schema 'bronze'.
+===============================================================================
+*/
 EXEC bronze.load_bronze;
 
 
